@@ -10,21 +10,15 @@
     <h1>Planet JS</h1>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
     <script>
-      let sun;
-      let earth;
-      let moon;
+      'use strict';
       const canvasWidth = 800;
       const canvasHeight = 800;
-
-      function setup() {
-        frameRate(30);
-
-        center = {
-          x: canvasWidth / 2,
-          y: canvasHeight / 2,
-        };
-
-        sun = new planet({
+      const center = {
+        x: canvasWidth / 2,
+        y: canvasHeight / 2,
+      };
+      const infoPlanets = [
+        {
           name: 'sun',
           distance: 0,
           x: center.x,
@@ -33,106 +27,116 @@
           speed: 0,
           color: 'gold',
           mother: null
-        });
-
-        mercury = new planet({
+        },
+        {
           name: 'mercury',
-          distance: 70,
-          x: center.x,
-          y: center.y,
+          distance: 65,
+          x: 0,
+          y: 0,
           diameter: 10,
           speed: 0.08,
           color: 'peru',
-          mother: sun
-        });
-
-        venus = new planet({
+          mother: 'sun'
+        },
+        {
           name: 'venus',
           distance: 90,
-          x: center.x,
-          y: center.y,
+          x: 0,
+          y: 0,
           diameter: 20,
           speed: 0.02,
           color: 'coral',
-          mother: sun
-        });
-
-        earth = new planet({
+          mother: 'sun'
+        },
+        {
             name: 'earth',
             distance: 130,
-            x: center.x,
-            y: center.y,
+            x: 0,
+            y: 0,
             diameter: 20.3,
             speed: 0.03,
             color: 'dodgerblue',
-            mother: sun
-        });
-
-        moon = new planet({
+            mother: 'sun'
+        },
+        {
             name: 'moon',
             distance: 15,
-            x: center.x,
-            y: center.y,
+            x: 0,
+            y: 0,
             diameter: 4,
             speed: 0.1,
             color: 'lemonchiffon',
-            mother: earth
-        });
-
-        mars = new planet({
+            mother: 'earth'
+        },
+        {
             name: 'mars',
             distance: 170,
-            x: center.x,
-            y: center.y,
+            x: 0,
+            y: 0,
             diameter: 15,
             speed: 0.01,
             color: 'tomato',
-            mother: sun
-        });
-
-        jupiter = new planet({
+            mother: 'sun'
+        },
+        {
             name: 'jupiter',
             distance: 250,
-            x: center.x,
-            y: center.y,
+            x: 0,
+            y: 0,
             diameter: 30,
             speed: 0.008,
             color: 'wheat',
-            mother: sun
-        });
-
-        saturn = new planetWithRings({
+            mother: 'sun'
+        },
+        {
             name: 'saturn',
             distance: 300,
-            x: center.x,
-            y: center.y,
+            x: 0,
+            y: 0,
             diameter: 27,
             speed: 0.006,
             color: 'lightsteelblue',
-            mother: sun
-        });
+            mother: 'sun'
+        },
+      ];
+      const planets = {};
 
+      function setup() {
+        frameRate(30);
+        createPlanet(infoPlanets);
         createCanvas(canvasWidth, canvasHeight);
       }
 
       function draw() {
         background('midnightblue');
-        sun.display();
-        mercury.move();
-        mercury.display();
-        venus.move();
-        venus.display();
-        earth.move();
-        earth.display();
-        moon.move();
-        moon.display();
-        mars.move();
-        mars.display();
-        jupiter.move();
-        jupiter.display();
-        saturn.move();
-        saturn.display();
-        saturn.createRings();
+        
+        for(let key in planets) {
+          const planet = planets[key];
+          planet.display();
+          planet.move();
+        }
+        
+        planets.saturn.createRings();
+      }
+
+      function createPlanet(data) {
+        data.forEach(elem => {
+          const motherPlanet = (elem.mother == null) ? null : elem.mother;
+          const centerX = center.x;
+          const centerY = center.y;
+          const objElem = {
+            name: elem.name,
+            distance: elem.distance,
+            x: elem.x,
+            y: elem.y,
+            diameter: elem.diameter,
+            speed: elem.speed,
+            color: elem.color,
+            mother: motherPlanet
+          };
+          
+          planets[elem.name] = (planets[elem.name] == 'saturn') ? new planet(objElem) : new planetWithRings(objElem);
+        });
       }
 
       class planet {
@@ -157,8 +161,8 @@
 
         move() {
           if(this.mother) {
-            this.x = this.mother.x;
-            this.y = this.mother.y;
+            this.x = planets[this.mother].x;
+            this.y = planets[this.mother].y;
           }
           this.x = this.x + (this.distance * Math.sin(this.angle));
           this.y = this.y + (this.distance * Math.cos(this.angle));
@@ -176,8 +180,8 @@
           noStroke();
           fill('white');
           for(let i=0; i < this.number; i++) {
-            const posX = window[this.name].x + (this.diameter * Math.sin(this.angle + i*2));
-            const posY = window[this.name].y + (this.diameter  * Math.cos(this.angle - i*2));
+            const posX = planets[this.name].x + (this.diameter * Math.sin(this.angle + i*2));
+            const posY = planets[this.name].y + (this.diameter  * Math.cos(this.angle - i*2));
             ellipse(posX , posY, this.diameter/8, this.diameter/8);
           }
         }
