@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Planet p5.js</title>
+  </head>
+  <body>
+    <h1>Planet JS</h1>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+    <script>
+      'use strict';
+      const canvasWidth = 800;
+      const canvasHeight = 800;
+      const center = {
+        x: canvasWidth / 2,
+        y: canvasHeight / 2,
+      };
+      const infoPlanets = [
+        {
+          name: 'sun',
+          distance: 0,
+          x: center.x,
+          y: center.y,
+          diameter: 100,
+          speed: 0,
+          color: 'gold',
+          mother: null
+        },
+        {
+          name: 'mercury',
+          distance: 65,
+          x: 0,
+          y: 0,
+          diameter: 10,
+          speed: 0.08,
+          color: 'peru',
+          mother: 'sun'
+        },
+        {
+          name: 'venus',
+          distance: 90,
+          x: 0,
+          y: 0,
+          diameter: 20,
+          speed: 0.02,
+          color: 'coral',
+          mother: 'sun'
+        },
+        {
+            name: 'earth',
+            distance: 130,
+            x: 0,
+            y: 0,
+            diameter: 20.3,
+            speed: 0.03,
+            color: 'dodgerblue',
+            mother: 'sun'
+        },
+        {
+            name: 'moon',
+            distance: 15,
+            x: 0,
+            y: 0,
+            diameter: 4,
+            speed: 0.1,
+            color: 'lemonchiffon',
+            mother: 'earth'
+        },
+        {
+            name: 'mars',
+            distance: 170,
+            x: 0,
+            y: 0,
+            diameter: 15,
+            speed: 0.01,
+            color: 'tomato',
+            mother: 'sun'
+        },
+        {
+            name: 'jupiter',
+            distance: 250,
+            x: 0,
+            y: 0,
+            diameter: 30,
+            speed: 0.008,
+            color: 'wheat',
+            mother: 'sun'
+        },
+        {
+            name: 'saturn',
+            distance: 300,
+            x: 0,
+            y: 0,
+            diameter: 27,
+            speed: 0.006,
+            color: 'lightsteelblue',
+            mother: 'sun'
+        },
+      ];
+
+      function setup() {
+        // image par seconde 30
+        frameRate(30);
+        /*
+          Exo 1 : créer une fonction createPlanet(arguments), créer une class planet,
+          la class planet a deux fonctions : display() qui permet d'afficher la planète,
+          et move() qui permet de faire bouger la planète.
+          createPlanet(arguments) crée toutes les planètes en appelant la class planet
+        */
+
+        /*
+          Astuce 1: Pour crée une ellipse dans p5js:
+          noStroke();
+          fill('white');
+          ellipse(x, y, diameter, diameter);
+        */
+
+        /*
+          Astuce 2 : voici la formule pour faire bouger un objet de façon circulaire:
+          x = x + (distance * Math.sin(angle));
+          y = y + (distance * Math.cos(angle));
+          il faut incrémenter l'angle pour le voir.
+        */
+
+        /*
+          Exo 2: créer une classe 'planetWithRings' qui étend la class 'planet' qui a pour 
+          fonction createRings(), cette fonction créer 60 petites ellipses qui forme l'anneau
+          de saturne.
+        */
+
+        // Permet d'afficher le canvas
+        createCanvas(canvasWidth, canvasHeight);
+      }
+
+      function draw() {
+        background('midnightblue');
+        // Ici on affiche la planete
+        // Ici on fait bouger la planete
+      }
+    </script>
+  </body>
+</html>

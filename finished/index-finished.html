@@ -109,13 +109,13 @@
 
       function draw() {
         background('midnightblue');
-        
+
         for(let key in planets) {
           const planet = planets[key];
           planet.display();
           planet.move();
         }
-        
+
         planets.saturn.createRings();
       }
 
@@ -134,7 +134,7 @@
             color: elem.color,
             mother: motherPlanet
           };
-          
+
           planets[elem.name] = (planets[elem.name] == 'saturn') ? new planet(objElem) : new planetWithRings(objElem);
         });
       }
