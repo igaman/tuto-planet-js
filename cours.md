@@ -34,10 +34,10 @@ Pour qu'une sous-classe hérite d'une autre classe on utilisera le mot clé exte
 class Contributor extends User {
   constructor(firstname, lastname, numberCommit) {
     // le mot clé super est utilisé comme super contructeur. Il permet d'appeler
-    // et d'avoir accès aux méthodes du parent
-    super(firstname, lastname);
+    // et d'avoir accès aux méthodes du parenEn réalité, les classes sont juste des fonctions spéciales. Ainsi, les classes sont définies de la même façon que les fonctions : par déclaration, ou par expression.t
+    super(firstname, lastname);d
     this.numberCommit = numberCommit;
-  }
+  }d
 
   sayNameWithCommit() {
     // on peut appeler une méthode de la classe parente avec `super.method`

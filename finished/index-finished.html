@@ -121,7 +121,6 @@
 
       function createPlanet(data) {
         data.forEach(elem => {
-          const motherPlanet = (elem.mother == null) ? null : elem.mother;
           const centerX = center.x;
           const centerY = center.y;
           const objElem = {
@@ -132,7 +131,7 @@
             diameter: elem.diameter,
             speed: elem.speed,
             color: elem.color,
-            mother: motherPlanet
+            mother: elem.mother
           };
 
           planets[elem.name] = (planets[elem.name] == 'saturn') ? new planet(objElem) : new planetWithRings(objElem);
@@ -140,8 +139,7 @@
       }
 
       class planet {
-        constructor(data) {
-          const { name, distance, x, y, diameter, speed, color, mother } = data;
+        constructor({ name, distance, x, y, diameter, speed, color, mother }) {
           this.distance = distance;
           this.x = x;
           this.y = y;
