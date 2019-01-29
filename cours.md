@@ -1,6 +1,9 @@
 #  Classes en javascript
 
 Les classes JavaScript ont été introduites avec ECMAScript 2015. Elles sont un « sucre syntaxique » par rapport à l'héritage prototypal. En effet, cette syntaxe n'introduit pas un nouveau modèle d'héritage dans JavaScript ! Elle fournit uniquement une syntaxe plus simple pour créer des objets et manipuler l'héritage. Toutefois, l'objectif de cette évolution est de rendre le code plus lisible et plus facilement accessible.
+
+En réalité, les classes sont juste des fonctions spéciales. Ainsi, les classes sont définies de la même façon que les fonctions : par déclaration, ou par expression.
+
 ```
 class User {
   // méthode constructor
